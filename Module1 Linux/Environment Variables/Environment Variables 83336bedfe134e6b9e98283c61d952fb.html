@@ -1,0 +1,684 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Environment Variables </title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="4db73fc8-ec58-453a-847c-a7a8c29491fd" class="page mono"><header><div class="page-header-icon undefined"><img class="icon" src="https://super.so/icon/light/edit-3.svg"/></div><h1 class="page-title">Environment Variables </h1><table class="properties"><tbody><tr class="property-row property-row-relation"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesRelation"><polygon points="4.5 1 4.5 3 9.586 3 1 11.586 2.414 13 11 4.414 11 9.5 13 9.5 13 1"></polygon></svg></span>Project</th><td><a href="https://www.notion.so/Module1-Linux-012f8f8155f745f68053f61714910da8"><img class="icon" src="https://super.so/icon/light/folder-plus.svg"/>Module1: Linux</a></td></tr><tr class="property-row property-row-rollup"><th><span class="icon property-icon"><svg viewBox="0 0 18 18" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesRollup"><path d="M17,15.6l-5.119-5.119C12.583,9.499,13,8.299,13,7c0-3.314-2.686-6-6-6S1,3.686,1,7s2.686,6,6,6 c1.299,0,2.499-0.417,3.481-1.119L15.6,17L17,15.6z M7,11c-2.209,0-4-1.791-4-4c0-2.209,1.791-4,4-4s4,1.791,4,4 C11,9.209,9.209,11,7,11z"></path></svg></span>Area</th><td>https://www.notion.so/db4d3f8fd47546eebe52fe130a4b4108</td></tr><tr class="property-row property-row-select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesSelect"><path d="M7,13 C10.31348,13 13,10.31371 13,7 C13,3.68629 10.31348,1 7,1 C3.68652,1 1,3.68629 1,7 C1,10.31371 3.68652,13 7,13 Z M3.75098,5.32278 C3.64893,5.19142 3.74268,5 3.90869,5 L10.09131,5 C10.25732,5 10.35107,5.19142 10.24902,5.32278 L7.15771,9.29703 C7.07764,9.39998 6.92236,9.39998 6.84229,9.29703 L3.75098,5.32278 Z"></path></svg></span>Priority</th><td></td></tr><tr class="property-row property-row-rollup"><th><span class="icon property-icon"><svg viewBox="0 0 18 18" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesRollup"><path d="M17,15.6l-5.119-5.119C12.583,9.499,13,8.299,13,7c0-3.314-2.686-6-6-6S1,3.686,1,7s2.686,6,6,6 c1.299,0,2.499-0.417,3.481-1.119L15.6,17L17,15.6z M7,11c-2.209,0-4-1.791-4-4c0-2.209,1.791-4,4-4s4,1.791,4,4 C11,9.209,9.209,11,7,11z"></path></svg></span>Project Work Time</th><td></td></tr><tr class="property-row property-row-rollup"><th><span class="icon property-icon"><svg viewBox="0 0 18 18" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesRollup"><path d="M17,15.6l-5.119-5.119C12.583,9.499,13,8.299,13,7c0-3.314-2.686-6-6-6S1,3.686,1,7s2.686,6,6,6 c1.299,0,2.499-0.417,3.481-1.119L15.6,17L17,15.6z M7,11c-2.209,0-4-1.791-4-4c0-2.209,1.791-4,4-4s4,1.791,4,4 C11,9.209,9.209,11,7,11z"></path></svg></span>Project Priority</th><td></td></tr><tr class="property-row property-row-checkbox"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCheckbox"><path d="M0,3 C0,1.34314 1.34326,0 3,0 L11,0 C12.6567,0 14,1.34314 14,3 L14,11 C14,12.6569 12.6567,14 11,14 L3,14 C1.34326,14 0,12.6569 0,11 L0,3 Z M3,1.5 C2.17139,1.5 1.5,2.17157 1.5,3 L1.5,11 C1.5,11.8284 2.17139,12.5 3,12.5 L11,12.5 C11.8286,12.5 12.5,11.8284 12.5,11 L12.5,3 C12.5,2.17157 11.8286,1.5 11,1.5 L3,1.5 Z M2.83252,6.8161 L3.39893,6.27399 L3.57617,6.10425 L3.92334,5.77216 L4.26904,6.10559 L4.44531,6.27582 L5.58398,7.37402 L9.28271,3.81073 L9.45996,3.64008 L9.80664,3.3056 L10.1538,3.63989 L10.3311,3.81067 L10.8936,4.35303 L11.0708,4.52399 L11.4434,4.88379 L11.0708,5.24353 L10.8936,5.41437 L6.1084,10.0291 L5.93115,10.2 L5.58398,10.5344 L5.23682,10.2 L5.05957,10.0292 L2.83057,7.87946 L2.65283,7.70801 L2.27832,7.34674 L2.6543,6.98694 L2.83252,6.8161 Z"></path></svg></span>Done</th><td><div class="checkbox checkbox-on"></div></td></tr><tr class="property-row property-row-rollup"><th><span class="icon property-icon"><svg viewBox="0 0 18 18" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesRollup"><path d="M17,15.6l-5.119-5.119C12.583,9.499,13,8.299,13,7c0-3.314-2.686-6-6-6S1,3.686,1,7s2.686,6,6,6 c1.299,0,2.499-0.417,3.481-1.119L15.6,17L17,15.6z M7,11c-2.209,0-4-1.791-4-4c0-2.209,1.791-4,4-4s4,1.791,4,4 C11,9.209,9.209,11,7,11z"></path></svg></span>Siblings</th><td>https://www.notion.so/1936a5af2e944af19a09377717e9ab6c, https://www.notion.so/223b886f2a1b4a4faddb14fe7a1b90a1, https://www.notion.so/4db73fc8ec58453a847ca7a8c29491fd, https://www.notion.so/b4345eaf1ca84637835b517930fcff05, https://www.notion.so/ccf6b348a2f74cff960cd0a8f027c32d, https://www.notion.so/d70c980694fd4181a60175e2b3978cc7, https://www.notion.so/f35ee20c9be1405ebae9028252c1712e, https://www.notion.so/f7c3401918d449b28b9cd35af8f7682b</td></tr><tr class="property-row property-row-formula"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesFormula"><path d="M7.77892,7.06304 L4.62218,11.2875 C4.58556,11.3416 4.55285,11.4392 4.5504,11.5052 C4.5504,11.7022 4.7047,11.8619 4.89562,11.8619 L11.1383,11.8619 C11.6139,11.8619 11.9996,12.2598 11.9996,12.7507 L11.9996,13.1111 C11.9996,13.602 11.6139,14 11.1383,14 L1.861927,14 C1.385853,14 1.00011061,13.602 1.00011061,13.1111 L1.00011061,12.6858 C0.99718092,12.4783 1.0523567,12.3098 1.176868,12.1466 L4.39269,7.79888 C4.74816,7.31841 4.74572,6.65139 4.38683,6.17354 L1.400013,2.19436 C1.27306,2.03028 1.216419,1.85993 1.219349,1.65006 L1.219349,0.888889 C1.219349,0.397968 1.605091,0 2.08117,0 L10.91906,0 C11.3946,0 11.7804,0.397968 11.7804,0.888889 L11.7804,1.24925 C11.7804,1.74017 11.3946,2.13814 10.91906,2.13814 L5.13634,2.13814 C4.94542,2.13814 4.79064,2.29801 4.79064,2.49522 C4.79308,2.56049 4.82482,2.65709 4.86095,2.71087 L7.78038,6.68628 C7.8297,6.74847 7.84435,6.7934 7.84142,6.87363 C7.84435,6.95493 7.82921,7.00048 7.77892,7.06304 Z"></path></svg></span>ID</th><td>-Module1: Linux-</td></tr><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M7.01356 14.0001C8.8042 14.0001 10.5958 13.3107 11.9575 11.9324C14.681 9.21201 14.6808 4.7603 11.9571 2.04013C9.23336 -0.680043 4.77573 -0.680043 2.05199 2.04013C0.727519 3.36277 0 5.13301 0 6.99553C0 8.8764 0.727811 10.6285 2.05199 11.9509C3.43207 13.3106 5.22243 14.0001 7.01356 14.0001ZM3.72947 7.00914V8.461V8.65543H3.92382H5.34563H8.2794H8.4738V8.461V5.52541V3.37947V3.18502H8.2794H6.82747H6.63307V3.37947V6.81467H3.92382H3.72947V7.00914ZM1.83985 6.99553C1.83985 5.61698 2.38099 4.32597 3.36061 3.3477C5.36746 1.34337 8.64803 1.34062 10.6585 3.33944C10.6613 3.34219 10.6639 3.34494 10.6668 3.3477C12.676 5.3546 12.6763 8.63642 10.6668 10.6434C8.65705 12.6504 5.37031 12.6504 3.36061 10.6434C2.38099 9.66506 1.83985 8.37408 1.83985 6.99553Z"></path></svg></span>Created Time</th><td><time>@June 30, 2022 12:56 AM</time></td></tr><tr class="property-row property-row-date"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesDate"><path d="M10.8889,5.5 L3.11111,5.5 L3.11111,7.05556 L10.8889,7.05556 L10.8889,5.5 Z M12.4444,1.05556 L11.6667,1.05556 L11.6667,0 L10.1111,0 L10.1111,1.05556 L3.88889,1.05556 L3.88889,0 L2.33333,0 L2.33333,1.05556 L1.55556,1.05556 C0.692222,1.05556 0.00777777,1.75556 0.00777777,2.61111 L0,12.5 C0,13.3556 0.692222,14 1.55556,14 L12.4444,14 C13.3,14 14,13.3556 14,12.5 L14,2.61111 C14,1.75556 13.3,1.05556 12.4444,1.05556 Z M12.4444,12.5 L1.55556,12.5 L1.55556,3.94444 L12.4444,3.94444 L12.4444,12.5 Z M8.55556,8.61111 L3.11111,8.61111 L3.11111,10.1667 L8.55556,10.1667 L8.55556,8.61111 Z"></path></svg></span>Finished At</th><td><time>@June 30, 2022 2:43 AM</time></td></tr><tr class="property-row property-row-relation"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesRelation"><polygon points="4.5 1 4.5 3 9.586 3 1 11.586 2.414 13 11 4.414 11 9.5 13 9.5 13 1"></polygon></svg></span>Related to Uni Courses (Active Tasks)</th><td></td></tr></tbody></table></header><div class="page-body"><nav id="be11ceb4-7e6a-410d-8d15-bc621501d815" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#06251891-7793-493b-b4d0-25ab52db1e38">Intro to environment variables  </a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#73846a41-f4ad-4608-8ce0-c133b653d9a9">Benefits of environment variables  </a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#d8db585b-d915-4661-9185-645147ed0387">Operations on environment variables</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#12af4457-e69c-4e4b-abe5-a5447bfc6901">The PATH environment variable</a></div></nav><p id="a3340908-51c4-4110-92ab-c9e437701157" class="">
+</p><h3 id="06251891-7793-493b-b4d0-25ab52db1e38" class="block-color-gray_background">Intro to environment variables  </h3><ul id="83948066-23db-468c-8712-f96ffa44b8a7" class="bulleted-list"><li style="list-style-type:disc">environment variables are a set of dynamic named values, stored within the system that are used by applications launched in shells. In simple words, an environment variable is a variable with a name and an associated value</li></ul><p id="46247925-c45d-4546-bcd1-0349d6efead0" class="">
+</p><ul id="0230f72d-2135-4bca-9abd-56927288c0fe" class="bulleted-list"><li style="list-style-type:disc"><code>printenv</code> print all system env var <figure id="83336bed-fe13-4e6b-9e98-283c61d952fb" class="image"><a href="Environment%20Variables%2083336bedfe134e6b9e98283c61d952fb/Untitled.png"><img style="width:940px" src="Environment%20Variables%2083336bedfe134e6b9e98283c61d952fb/Untitled.png"/></a></figure><figure id="5b7f101e-b916-47b8-baba-796f8bc21ab7" class="image"><a href="Environment%20Variables%2083336bedfe134e6b9e98283c61d952fb/Untitled%201.png"><img style="width:936px" src="Environment%20Variables%2083336bedfe134e6b9e98283c61d952fb/Untitled%201.png"/></a></figure></li></ul><p id="62ed4d15-bad2-46e8-994b-fe133fb497d9" class="">
+</p><ul id="bfd38c28-4a5c-4a7e-ad3b-a9f4b203869c" class="bulleted-list"><li style="list-style-type:disc"><code>printenv VAR</code> print the value of VAR environment variable<figure id="c8bbfd0b-8152-4919-88a3-a43bbdfa37d2" class="image"><a href="Environment%20Variables%2083336bedfe134e6b9e98283c61d952fb/Untitled%202.png"><img style="width:933px" src="Environment%20Variables%2083336bedfe134e6b9e98283c61d952fb/Untitled%202.png"/></a></figure></li></ul><p id="fcbde2cb-6679-4783-8395-d7684b5d292e" class="">
+</p><ul id="a492da54-ddd7-4206-bc9c-efd11aa69338" class="bulleted-list"><li style="list-style-type:disc">environment variables can be accessed by linux programs and commands and also programming languages by typing $ before the variable <code>$USER</code> just like in bash script<figure id="d1c89112-bb61-4ac3-a3c2-db0746ab2ce9" class="image"><a href="Environment%20Variables%2083336bedfe134e6b9e98283c61d952fb/Untitled%203.png"><img style="width:939px" src="Environment%20Variables%2083336bedfe134e6b9e98283c61d952fb/Untitled%203.png"/></a></figure></li></ul><p id="4abf4725-d4ab-4a1a-affd-247224b432ea" class="">
+</p><p id="f1a28e71-ebad-4556-b59a-0caa8b879906" class="">
+</p><h3 id="73846a41-f4ad-4608-8ce0-c133b653d9a9" class="block-color-gray_background">Benefits of environment variables  </h3><p id="48a7e874-8340-418d-b018-b3057dfb4b19" class=""><mark class="highlight-blue">Note that environment variables are not only a way for the os to store some info, it has other important use cases, like when running an application on a linux server which connects to google api, this connection have credentials (username and password).</mark></p><div id="1b40208f-2ded-4447-848d-8416f2677625" class="column-list"><div id="81238a76-8ed6-48f1-af2e-95b5f6205266" style="width:50%" class="column"><p id="c4694968-0199-48bb-bc84-3b0639cf044a" class=""><mark class="highlight-blue">how can we provide this sensitive credentials info in a secure way? we can’t just put them in our program in plain sight for anyone to see.</mark></p></div><div id="dd0fdbdb-566b-42a7-b788-7f289be69b70" style="width:50%" class="column"><figure id="95925748-1d4f-4e91-bd70-b0459f13c0ba" class="image"><a href="Environment%20Variables%2083336bedfe134e6b9e98283c61d952fb/Untitled%204.png"><img style="width:657px" src="Environment%20Variables%2083336bedfe134e6b9e98283c61d952fb/Untitled%204.png"/></a></figure></div></div><p id="c557e8d5-d549-4490-b49c-4d351b43f9ea" class=""><mark class="highlight-blue">the answer is using environment variables, the application can access the sensitive data without showing them, we create an environment variables for every sensitive data entry.</mark></p><figure id="a418d886-38af-4447-ae79-149bffc349ba" class="image"><a href="Environment%20Variables%2083336bedfe134e6b9e98283c61d952fb/Untitled%205.png"><img style="width:384px" src="Environment%20Variables%2083336bedfe134e6b9e98283c61d952fb/Untitled%205.png"/></a></figure><p id="0ef8446a-777a-446a-b633-adcc5c7c1e97" class="">
+</p><p id="63ce0bfb-3f33-4d2e-8d9e-08d0e803ab69" class=""><mark class="highlight-blue">also</mark> <mark class="highlight-blue">environment variables are used to make applications more flexible</mark></p><figure id="97f3098f-5ab7-4e12-864f-de0b5d9c0f9e" class="image"><a href="Environment%20Variables%2083336bedfe134e6b9e98283c61d952fb/Untitled%206.png"><img style="width:384px" src="Environment%20Variables%2083336bedfe134e6b9e98283c61d952fb/Untitled%206.png"/></a></figure><p id="e3028bb3-e4b7-40ef-95ac-58288852ae9c" class="">
+</p><p id="58b3835c-6205-400b-a6a4-52acee3771c0" class="">
+</p><p id="42584f94-bf83-4602-8a1d-5a9663918042" class="">
+</p><h3 id="d8db585b-d915-4661-9185-645147ed0387" class="block-color-gray_background">Operations on environment variables</h3><ul id="9341da62-fb4f-4d49-a424-2d14cfe99096" class="bulleted-list"><li style="list-style-type:disc"><code>export ENV_VAR=value</code> creating env var</li></ul><ul id="71104af9-b222-4f5b-99e5-f216280357ff" class="bulleted-list"><li style="list-style-type:disc"><code>unset ENV_VAR</code> deletes env var</li></ul><figure id="b3e2ab81-2c6e-4fab-b05d-9271aac36dfb" class="image"><a href="Environment%20Variables%2083336bedfe134e6b9e98283c61d952fb/Untitled%207.png"><img style="width:942px" src="Environment%20Variables%2083336bedfe134e6b9e98283c61d952fb/Untitled%207.png"/></a></figure><p id="cea36212-4f5a-4288-9a22-d7313192b0c8" class="">
+</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="44b7b957-e3cd-498e-96bb-a29fc31a1a90"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Note that if we closed this terminal the created env vars will be gone, to save them permanently we need to add export commands in the <code>.bashrc </code>file and then source it.</div></figure><figure id="8ce9e371-02e2-4d70-9953-a9e42f8adb45" class="image"><a href="Environment%20Variables%2083336bedfe134e6b9e98283c61d952fb/Untitled%208.png"><img style="width:948px" src="Environment%20Variables%2083336bedfe134e6b9e98283c61d952fb/Untitled%208.png"/></a></figure><figure id="e71f1909-5616-41e7-89f2-6bf3f26487e8" class="image"><a href="Environment%20Variables%2083336bedfe134e6b9e98283c61d952fb/Untitled%209.png"><img style="width:940px" src="Environment%20Variables%2083336bedfe134e6b9e98283c61d952fb/Untitled%209.png"/></a></figure><p id="a2d94de0-e224-4cfc-b8f3-be8541e4ae01" class="">
+</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="62bb1b55-763d-45e6-aa0a-2362aa202ac1"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Note that the above <code>.bashrc</code> is unique for each user, which means that the env vars we created won’t be accessible by other users. however we can make them global to all users by adding them in the <code>.bashrc</code> of the root which is located in <code>/etc/environment</code> </div></figure><p id="a6fc1755-cdea-46ce-8a3e-eef52c239c1c" class="">
+</p><h3 id="12af4457-e69c-4e4b-abe5-a5447bfc6901" class="block-color-gray_background">The PATH environment variable</h3><figure id="10b66b97-fba5-4bb6-b1bf-2677cc68acfd" class="image"><a href="Environment%20Variables%2083336bedfe134e6b9e98283c61d952fb/Untitled%2010.png"><img style="width:932px" src="Environment%20Variables%2083336bedfe134e6b9e98283c61d952fb/Untitled%2010.png"/></a></figure><p id="9e53dd1d-e7d2-438c-afa0-b4194b6ba4ad" class="">is a list of directories to executable files separated by :</p><p id="ad53db19-22f6-4631-8ff0-62cce949f78c" class="">it tells the shell which directories to search for for the executables that we write in our commands</p><p id="fd3d834b-99cd-4ec7-937f-7e3807632f0f" class="">ex: when we type <code>ls</code> command, the shell searches in every directory in the PATH env var (every element in the list) until it finds it to execute it.</p><p id="fc715955-3b54-4942-9a01-c95c50954a7b" class="">so if we added a directory of a new created exeuteble file to the PATH env var, we can execute it like <code>ls</code> anywhere.</p><p id="3d1fd924-3e25-455b-b077-cae578fca66d" class="">Use case for me will be to save the github token in an env var.</p><p id="02ce5afe-e31f-4159-9641-85f610dcd031" class="">
+</p><ul id="de3cc4dd-33b0-49a2-a229-fa1e3dded4c0" class="bulleted-list"><li style="list-style-type:disc">Adding a custom command/program to the PATH env var<ul id="db05022b-6abb-49ff-b6c0-d2e4e27b0012" class="bulleted-list"><li style="list-style-type:circle">creating the new script<figure id="bc04b6ce-0e9b-4bda-bf68-06f407d017a3" class="image"><a href="Environment%20Variables%2083336bedfe134e6b9e98283c61d952fb/Untitled%2011.png"><img style="width:941px" src="Environment%20Variables%2083336bedfe134e6b9e98283c61d952fb/Untitled%2011.png"/></a></figure></li></ul><ul id="7053ed27-ff49-4a9e-a960-db13bfe1f86d" class="bulleted-list"><li style="list-style-type:circle">adding it to the PATH env var</li></ul><figure id="df0dff7c-5127-4597-9e51-3a4b02c9eb87" class="image"><a href="Environment%20Variables%2083336bedfe134e6b9e98283c61d952fb/Untitled%2012.png"><img style="width:936px" src="Environment%20Variables%2083336bedfe134e6b9e98283c61d952fb/Untitled%2012.png"/></a></figure><p id="c6041952-ee4f-47c9-a3d3-ce07a5e82568" class="">note that we didn’t use export with PATH because it’s already an existing env var, we’re just changing it</p><figure id="15137cab-a0c2-4856-9178-0e005f24792b" class="image"><a href="Environment%20Variables%2083336bedfe134e6b9e98283c61d952fb/Untitled%2013.png"><img style="width:940px" src="Environment%20Variables%2083336bedfe134e6b9e98283c61d952fb/Untitled%2013.png"/></a></figure></li></ul><p id="c636a7eb-b6f2-4766-9343-40ec26c0f7dc" class="">so the benefit here is that instead of specifying the entire path <code>/home/eslamdyab21/p0/</code><a href="http://welcome.sh"><code>welcome.sh</code></a> we just type <code>welcome.sh </code>anywhere </p><p id="696e05e2-51d7-4f6a-bc88-267f24f1f381" class="">
+</p></div></article></body></html>

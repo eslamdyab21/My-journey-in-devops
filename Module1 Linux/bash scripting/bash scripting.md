@@ -26,9 +26,9 @@ Finished At
 
 Related to Uni Courses (Active Tasks)
 
-[Variables](#38dbc6b1-c9ce-4aa2-a420-9ffed27bf4d1)
+[Variables](#Variables)
 
-[Conditions](#d9d33102-4c96-4bc5-a19e-e052fc7dbc11)
+[Conditions](#Conditions)
 
 [Numeric compactors](#90725ef0-b056-49c9-bbcd-4a1cc42752fe)
 
@@ -48,6 +48,7 @@ Related to Uni Courses (Active Tasks)
     
     [![](bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled%201.png)](bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled%201.png)
     
+
 
 ### Variables
 
