@@ -1,0 +1,684 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Owners and permissions </title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="b4345eaf-1ca8-4637-835b-517930fcff05" class="page mono"><header><div class="page-header-icon undefined"><img class="icon" src="https://super.so/icon/light/edit-3.svg"/></div><h1 class="page-title">Owners and permissions </h1><table class="properties"><tbody><tr class="property-row property-row-relation"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesRelation"><polygon points="4.5 1 4.5 3 9.586 3 1 11.586 2.414 13 11 4.414 11 9.5 13 9.5 13 1"></polygon></svg></span>Project</th><td><a href="https://www.notion.so/Module1-Linux-012f8f8155f745f68053f61714910da8"><img class="icon" src="https://super.so/icon/light/folder-plus.svg"/>Module1: Linux</a></td></tr><tr class="property-row property-row-rollup"><th><span class="icon property-icon"><svg viewBox="0 0 18 18" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesRollup"><path d="M17,15.6l-5.119-5.119C12.583,9.499,13,8.299,13,7c0-3.314-2.686-6-6-6S1,3.686,1,7s2.686,6,6,6 c1.299,0,2.499-0.417,3.481-1.119L15.6,17L17,15.6z M7,11c-2.209,0-4-1.791-4-4c0-2.209,1.791-4,4-4s4,1.791,4,4 C11,9.209,9.209,11,7,11z"></path></svg></span>Area</th><td>https://www.notion.so/db4d3f8fd47546eebe52fe130a4b4108</td></tr><tr class="property-row property-row-select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesSelect"><path d="M7,13 C10.31348,13 13,10.31371 13,7 C13,3.68629 10.31348,1 7,1 C3.68652,1 1,3.68629 1,7 C1,10.31371 3.68652,13 7,13 Z M3.75098,5.32278 C3.64893,5.19142 3.74268,5 3.90869,5 L10.09131,5 C10.25732,5 10.35107,5.19142 10.24902,5.32278 L7.15771,9.29703 C7.07764,9.39998 6.92236,9.39998 6.84229,9.29703 L3.75098,5.32278 Z"></path></svg></span>Priority</th><td></td></tr><tr class="property-row property-row-rollup"><th><span class="icon property-icon"><svg viewBox="0 0 18 18" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesRollup"><path d="M17,15.6l-5.119-5.119C12.583,9.499,13,8.299,13,7c0-3.314-2.686-6-6-6S1,3.686,1,7s2.686,6,6,6 c1.299,0,2.499-0.417,3.481-1.119L15.6,17L17,15.6z M7,11c-2.209,0-4-1.791-4-4c0-2.209,1.791-4,4-4s4,1.791,4,4 C11,9.209,9.209,11,7,11z"></path></svg></span>Project Work Time</th><td></td></tr><tr class="property-row property-row-rollup"><th><span class="icon property-icon"><svg viewBox="0 0 18 18" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesRollup"><path d="M17,15.6l-5.119-5.119C12.583,9.499,13,8.299,13,7c0-3.314-2.686-6-6-6S1,3.686,1,7s2.686,6,6,6 c1.299,0,2.499-0.417,3.481-1.119L15.6,17L17,15.6z M7,11c-2.209,0-4-1.791-4-4c0-2.209,1.791-4,4-4s4,1.791,4,4 C11,9.209,9.209,11,7,11z"></path></svg></span>Project Priority</th><td></td></tr><tr class="property-row property-row-checkbox"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCheckbox"><path d="M0,3 C0,1.34314 1.34326,0 3,0 L11,0 C12.6567,0 14,1.34314 14,3 L14,11 C14,12.6569 12.6567,14 11,14 L3,14 C1.34326,14 0,12.6569 0,11 L0,3 Z M3,1.5 C2.17139,1.5 1.5,2.17157 1.5,3 L1.5,11 C1.5,11.8284 2.17139,12.5 3,12.5 L11,12.5 C11.8286,12.5 12.5,11.8284 12.5,11 L12.5,3 C12.5,2.17157 11.8286,1.5 11,1.5 L3,1.5 Z M2.83252,6.8161 L3.39893,6.27399 L3.57617,6.10425 L3.92334,5.77216 L4.26904,6.10559 L4.44531,6.27582 L5.58398,7.37402 L9.28271,3.81073 L9.45996,3.64008 L9.80664,3.3056 L10.1538,3.63989 L10.3311,3.81067 L10.8936,4.35303 L11.0708,4.52399 L11.4434,4.88379 L11.0708,5.24353 L10.8936,5.41437 L6.1084,10.0291 L5.93115,10.2 L5.58398,10.5344 L5.23682,10.2 L5.05957,10.0292 L2.83057,7.87946 L2.65283,7.70801 L2.27832,7.34674 L2.6543,6.98694 L2.83252,6.8161 Z"></path></svg></span>Done</th><td><div class="checkbox checkbox-on"></div></td></tr><tr class="property-row property-row-rollup"><th><span class="icon property-icon"><svg viewBox="0 0 18 18" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesRollup"><path d="M17,15.6l-5.119-5.119C12.583,9.499,13,8.299,13,7c0-3.314-2.686-6-6-6S1,3.686,1,7s2.686,6,6,6 c1.299,0,2.499-0.417,3.481-1.119L15.6,17L17,15.6z M7,11c-2.209,0-4-1.791-4-4c0-2.209,1.791-4,4-4s4,1.791,4,4 C11,9.209,9.209,11,7,11z"></path></svg></span>Siblings</th><td>https://www.notion.so/1936a5af2e944af19a09377717e9ab6c, https://www.notion.so/223b886f2a1b4a4faddb14fe7a1b90a1, https://www.notion.so/4db73fc8ec58453a847ca7a8c29491fd, https://www.notion.so/b4345eaf1ca84637835b517930fcff05, https://www.notion.so/ccf6b348a2f74cff960cd0a8f027c32d, https://www.notion.so/d70c980694fd4181a60175e2b3978cc7, https://www.notion.so/f35ee20c9be1405ebae9028252c1712e, https://www.notion.so/f7c3401918d449b28b9cd35af8f7682b</td></tr><tr class="property-row property-row-formula"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesFormula"><path d="M7.77892,7.06304 L4.62218,11.2875 C4.58556,11.3416 4.55285,11.4392 4.5504,11.5052 C4.5504,11.7022 4.7047,11.8619 4.89562,11.8619 L11.1383,11.8619 C11.6139,11.8619 11.9996,12.2598 11.9996,12.7507 L11.9996,13.1111 C11.9996,13.602 11.6139,14 11.1383,14 L1.861927,14 C1.385853,14 1.00011061,13.602 1.00011061,13.1111 L1.00011061,12.6858 C0.99718092,12.4783 1.0523567,12.3098 1.176868,12.1466 L4.39269,7.79888 C4.74816,7.31841 4.74572,6.65139 4.38683,6.17354 L1.400013,2.19436 C1.27306,2.03028 1.216419,1.85993 1.219349,1.65006 L1.219349,0.888889 C1.219349,0.397968 1.605091,0 2.08117,0 L10.91906,0 C11.3946,0 11.7804,0.397968 11.7804,0.888889 L11.7804,1.24925 C11.7804,1.74017 11.3946,2.13814 10.91906,2.13814 L5.13634,2.13814 C4.94542,2.13814 4.79064,2.29801 4.79064,2.49522 C4.79308,2.56049 4.82482,2.65709 4.86095,2.71087 L7.78038,6.68628 C7.8297,6.74847 7.84435,6.7934 7.84142,6.87363 C7.84435,6.95493 7.82921,7.00048 7.77892,7.06304 Z"></path></svg></span>ID</th><td>-Module1: Linux-</td></tr><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M7.01356 14.0001C8.8042 14.0001 10.5958 13.3107 11.9575 11.9324C14.681 9.21201 14.6808 4.7603 11.9571 2.04013C9.23336 -0.680043 4.77573 -0.680043 2.05199 2.04013C0.727519 3.36277 0 5.13301 0 6.99553C0 8.8764 0.727811 10.6285 2.05199 11.9509C3.43207 13.3106 5.22243 14.0001 7.01356 14.0001ZM3.72947 7.00914V8.461V8.65543H3.92382H5.34563H8.2794H8.4738V8.461V5.52541V3.37947V3.18502H8.2794H6.82747H6.63307V3.37947V6.81467H3.92382H3.72947V7.00914ZM1.83985 6.99553C1.83985 5.61698 2.38099 4.32597 3.36061 3.3477C5.36746 1.34337 8.64803 1.34062 10.6585 3.33944C10.6613 3.34219 10.6639 3.34494 10.6668 3.3477C12.676 5.3546 12.6763 8.63642 10.6668 10.6434C8.65705 12.6504 5.37031 12.6504 3.36061 10.6434C2.38099 9.66506 1.83985 8.37408 1.83985 6.99553Z"></path></svg></span>Created Time</th><td><time>@June 29, 2022 2:18 PM</time></td></tr><tr class="property-row property-row-date"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesDate"><path d="M10.8889,5.5 L3.11111,5.5 L3.11111,7.05556 L10.8889,7.05556 L10.8889,5.5 Z M12.4444,1.05556 L11.6667,1.05556 L11.6667,0 L10.1111,0 L10.1111,1.05556 L3.88889,1.05556 L3.88889,0 L2.33333,0 L2.33333,1.05556 L1.55556,1.05556 C0.692222,1.05556 0.00777777,1.75556 0.00777777,2.61111 L0,12.5 C0,13.3556 0.692222,14 1.55556,14 L12.4444,14 C13.3,14 14,13.3556 14,12.5 L14,2.61111 C14,1.75556 13.3,1.05556 12.4444,1.05556 Z M12.4444,12.5 L1.55556,12.5 L1.55556,3.94444 L12.4444,3.94444 L12.4444,12.5 Z M8.55556,8.61111 L3.11111,8.61111 L3.11111,10.1667 L8.55556,10.1667 L8.55556,8.61111 Z"></path></svg></span>Finished At</th><td><time>@June 29, 2022 4:00 PM</time></td></tr><tr class="property-row property-row-relation"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesRelation"><polygon points="4.5 1 4.5 3 9.586 3 1 11.586 2.414 13 11 4.414 11 9.5 13 9.5 13 1"></polygon></svg></span>Related to Uni Courses (Active Tasks)</th><td></td></tr></tbody></table></header><div class="page-body"><h2 id="b1f9b9eb-9dd1-4a92-8f7b-b26a44e90a61" class="block-color-gray_background">Ownership </h2><ul id="78d0d516-e353-43dd-a928-10f8d99eb762" class="bulleted-list"><li style="list-style-type:disc">the user who created a file is the owner of that file, and the primary group of that user is the primary group of that file. and <code>ls -l</code> displays the ownership and permissions info.<figure id="91b957af-1ef7-4d26-98c4-b34db2f5bd7d" class="image"><a href="Owners%20and%20permissions%2091b957af1ef74d2698c4b34db2f5bd7d/Untitled.png"><img style="width:940px" src="Owners%20and%20permissions%2091b957af1ef74d2698c4b34db2f5bd7d/Untitled.png"/></a></figure><p id="9b38e3d9-7e85-47f8-a603-63d2d03d7e69" class="">here we created a text file called <code>info.txt</code> with eslamdyab21 user and eslamdyab21 group, because we currently logged as that user. <mark class="highlight-teal"><code>eslamdyab21</code></mark><code>@cloudshell:~/p0 (rextes)</code></p></li></ul><p id="a8ccda3a-8d07-4455-a0dd-ea63c3d029fe" class="">
+</p><ul id="2bcd5a7c-5f6c-4d73-95c7-c8fcca4b7d24" class="bulleted-list"><li style="list-style-type:disc">if we switch to tom user whose primary group is devops, its info will be displayed  <figure id="e5fdae84-e9c5-427e-a51f-0bbaf032605e" class="image"><a href="Owners%20and%20permissions%2091b957af1ef74d2698c4b34db2f5bd7d/Untitled%201.png"><img style="width:940px" src="Owners%20and%20permissions%2091b957af1ef74d2698c4b34db2f5bd7d/Untitled%201.png"/></a></figure></li></ul><p id="f7e31de1-d14f-4e78-adeb-0029fc9de2f0" class="">
+</p><ul id="105d5678-8468-4675-a494-f59319958784" class="bulleted-list"><li style="list-style-type:disc">we can change the owner user and group of a file, <code>sudo chown user:group file</code><figure id="11241eaf-584c-4b5e-b83b-397c220f6ed0" class="image"><a href="Owners%20and%20permissions%2091b957af1ef74d2698c4b34db2f5bd7d/Untitled%202.png"><img style="width:937px" src="Owners%20and%20permissions%2091b957af1ef74d2698c4b34db2f5bd7d/Untitled%202.png"/></a></figure></li></ul><p id="0c6be46d-9eef-4140-8652-223c9d3833b5" class="">
+</p><ul id="c166a94d-f8aa-4d51-80f0-d94619c022b4" class="bulleted-list"><li style="list-style-type:disc"><code>ls -l /etc/</code> see who owns the files in etc <figure id="07bd939d-73ff-4b9e-b55d-2482b65b4bed" class="image"><a href="Owners%20and%20permissions%2091b957af1ef74d2698c4b34db2f5bd7d/Untitled%203.png"><img style="width:927px" src="Owners%20and%20permissions%2091b957af1ef74d2698c4b34db2f5bd7d/Untitled%203.png"/></a></figure><p id="a9179e01-f376-4126-8b41-a3031226808a" class="">they are owned by root because they are system files which are created by the system itself.</p><p id="1680cc17-ad65-4a94-bc4f-1ec2247ad72c" class="">
+</p></li></ul><ul id="6b7dbbc9-26d8-434b-be1b-1735ddf1ad65" class="bulleted-list"><li style="list-style-type:disc"><code>sudo chown user file</code> change only the user owner of a file<figure id="7b331ea6-767d-4883-991c-87e3570cfc95" class="image"><a href="Owners%20and%20permissions%2091b957af1ef74d2698c4b34db2f5bd7d/Untitled%204.png"><img style="width:944px" src="Owners%20and%20permissions%2091b957af1ef74d2698c4b34db2f5bd7d/Untitled%204.png"/></a></figure></li></ul><ul id="8b3dfaf3-fa7e-46d7-ad24-aebe0f0b2a57" class="bulleted-list"><li style="list-style-type:disc"><code>sudo chgrp group file</code> change only the group owner of a file<figure id="83659c1d-d0bf-43a3-a646-7f729b586680" class="image"><a href="Owners%20and%20permissions%2091b957af1ef74d2698c4b34db2f5bd7d/Untitled%205.png"><img style="width:942px" src="Owners%20and%20permissions%2091b957af1ef74d2698c4b34db2f5bd7d/Untitled%205.png"/></a></figure></li></ul><p id="f0d560c4-0687-40b9-b91f-bd1cad7d79a6" class="">
+</p><p id="0697a615-4577-4ced-b9f7-d013f84e808e" class="">
+</p><h2 id="4981dc0e-c4ea-4918-b448-13786575a2e2" class="block-color-gray_background">Permissions </h2><figure id="3fad07f3-2924-450f-a9b3-401ddd77dc50" class="image"><a href="Owners%20and%20permissions%2091b957af1ef74d2698c4b34db2f5bd7d/Untitled%206.png"><img style="width:931px" src="Owners%20and%20permissions%2091b957af1ef74d2698c4b34db2f5bd7d/Untitled%206.png"/></a></figure><div id="98a90422-9ed2-4482-8c12-ef1d9786171e" class="column-list"><div id="512dc397-82d2-4204-b253-11794f8050b0" style="width:37.5%" class="column"><ul id="0c513be4-e93e-4cf0-a8b5-7d90a34fefd3" class="bulleted-list"><li style="list-style-type:disc">r —&gt; read</li></ul><ul id="46102b67-b394-4489-b50b-f3bafa49caf6" class="bulleted-list"><li style="list-style-type:disc">w —&gt; write</li></ul><ul id="ff6b97a6-8678-497c-9d06-df2895376f74" class="bulleted-list"><li style="list-style-type:disc">x —&gt; execute </li></ul><ul id="5a2166b7-d05f-4a66-b6ce-6c7c57b154e5" class="bulleted-list"><li style="list-style-type:disc">d —&gt; directory </li></ul></div><div id="055ba315-ae1d-479a-85b6-1232d8001418" style="width:62.5%" class="column"><figure id="65e6c7ac-1eda-456b-96af-c9d2f82e443d" class="image"><a href="Owners%20and%20permissions%2091b957af1ef74d2698c4b34db2f5bd7d/Untitled%207.png"><img style="width:288px" src="Owners%20and%20permissions%2091b957af1ef74d2698c4b34db2f5bd7d/Untitled%207.png"/></a></figure></div></div><p id="85a9d52d-4a94-494d-9b98-dadfabc7da27" class="">here if we look at <code>main.py </code></p><p id="f5d730dd-ac02-4a12-9b47-3e982d5821e8" class=""><mark class="highlight-yellow"><code>-rwx</code></mark><mark class="highlight-teal"><code>r--</code></mark><mark class="highlight-purple"><code>r--</code></mark><code> 1 eslamdyab21 eslamdyab21   48 Jun 29 13:13 main.py </code></p><ul id="f083630a-f311-4e6b-8c0e-dee6fc752812" class="bulleted-list"><li style="list-style-type:disc">the <mark class="highlight-yellow">owner</mark> <mark class="highlight-yellow">user</mark> (eslamdyab21) has read, write and execute permissions </li></ul><ul id="379605f6-63c5-45c6-9c03-3fc763fe705a" class="bulleted-list"><li style="list-style-type:disc">the <mark class="highlight-teal">owner group</mark> (eslamdyab21) has read permissions only</li></ul><ul id="4349d8b1-b405-409e-996d-275826c422fb" class="bulleted-list"><li style="list-style-type:disc">the <mark class="highlight-purple">other groups</mark> has read permissions only</li></ul><p id="8b13c270-7c54-4162-b331-ad6c667d9730" class="">this means only eslamdyab21 user can modify and run this script.</p><figure id="99550332-f3c1-41a2-8c9a-23d585ed6d2c" class="image"><a href="Owners%20and%20permissions%2091b957af1ef74d2698c4b34db2f5bd7d/Untitled%208.png"><img style="width:943px" src="Owners%20and%20permissions%2091b957af1ef74d2698c4b34db2f5bd7d/Untitled%208.png"/></a></figure><p id="3cc4494c-abeb-4a64-b421-3456f8ac5ca8" class="">
+</p><p id="dbee46ce-538a-451c-8b7b-9bca08d7487e" class="">if we switch to tom user:</p><figure id="d0149ece-23c5-4925-a8e7-9137b6976fdc" class="image"><a href="Owners%20and%20permissions%2091b957af1ef74d2698c4b34db2f5bd7d/Untitled%209.png"><img style="width:432px" src="Owners%20and%20permissions%2091b957af1ef74d2698c4b34db2f5bd7d/Untitled%209.png"/></a></figure><p id="367daa8b-4187-4a18-9e05-a7b2b56774f3" class="">to give tom write permissions we need to change the permissions for the other group (which includes devops group which tom is in)<div class="indented"><ul id="dcb8e482-01a6-4607-b0e2-8712f1b44d8d" class="bulleted-list"><li style="list-style-type:disc">u for user</li></ul><ul id="61ced51f-bc23-4214-8995-99d7e6d46782" class="bulleted-list"><li style="list-style-type:disc">g for group</li></ul><ul id="9739893b-b3e5-442a-8bb4-443df56ea485" class="bulleted-list"><li style="list-style-type:disc">o for other</li></ul><ul id="4beadfa2-ea71-4e9d-b1c0-52b4c489e1d6" class="bulleted-list"><li style="list-style-type:disc">a for all</li></ul></div></p><ul id="77a8809a-3a2c-456f-b78c-ae2c3f15cf71" class="bulleted-list"><li style="list-style-type:disc"><code>sudo chmod o+w file</code><figure id="ec00c20a-2dd0-48ce-9726-c9d07932da63" class="image"><a href="Owners%20and%20permissions%2091b957af1ef74d2698c4b34db2f5bd7d/Untitled%2010.png"><img style="width:938px" src="Owners%20and%20permissions%2091b957af1ef74d2698c4b34db2f5bd7d/Untitled%2010.png"/></a></figure><p id="d29a3a13-4f23-4f9d-a82c-7acc1389b882" class="">now we can edit the file in other groups</p></li></ul><p id="d73090ce-2088-487b-b9f4-b46e90b1393a" class="">
+</p><ul id="a94b45ea-ca9c-4e0d-a37c-4fb795130527" class="bulleted-list"><li style="list-style-type:disc"><code>sudo chmod o-w file</code> to take the write permission from other groups<figure id="9a96d35b-dc4f-451c-b207-d614d19ca5b6" class="image"><a href="Owners%20and%20permissions%2091b957af1ef74d2698c4b34db2f5bd7d/Untitled%2011.png"><img style="width:944px" src="Owners%20and%20permissions%2091b957af1ef74d2698c4b34db2f5bd7d/Untitled%2011.png"/></a></figure></li></ul><ul id="c4b1c5fc-2008-455e-bdc4-3d7760138484" class="bulleted-list"><li style="list-style-type:disc"><code>sudo chmod g+w file</code> add write permission to eslamdyab21 group <figure id="9f0c0bac-9f42-48ea-ab41-5f90f076e29c" class="image"><a href="Owners%20and%20permissions%2091b957af1ef74d2698c4b34db2f5bd7d/Untitled%2012.png"><img style="width:941px" src="Owners%20and%20permissions%2091b957af1ef74d2698c4b34db2f5bd7d/Untitled%2012.png"/></a></figure></li></ul><ul id="252eab4d-801f-4de9-9408-31fc21fa8034" class="bulleted-list"><li style="list-style-type:disc"><code>sudo chmod a+r file</code> add read permission for all users<figure id="aee1a849-176f-4d71-9079-52aebd1dd58a" class="image"><a href="Owners%20and%20permissions%2091b957af1ef74d2698c4b34db2f5bd7d/Untitled%2013.png"><img style="width:947px" src="Owners%20and%20permissions%2091b957af1ef74d2698c4b34db2f5bd7d/Untitled%2013.png"/></a></figure></li></ul><p id="b47e921b-3d11-4d1f-afc2-7c7d486f95e7" class="">
+</p><ul id="f40f3fed-e7a2-4352-9dda-b8add67badc6" class="bulleted-list"><li style="list-style-type:disc">we can specify all the permissions at once <code>sudo chmod o=rwx file</code><figure id="b21e2d51-06fd-441d-87d8-ef2f8c64d2df" class="image"><a href="Owners%20and%20permissions%2091b957af1ef74d2698c4b34db2f5bd7d/Untitled%2014.png"><img style="width:939px" src="Owners%20and%20permissions%2091b957af1ef74d2698c4b34db2f5bd7d/Untitled%2014.png"/></a></figure><figure id="61e7f2cb-abf0-4983-ab6b-8befbc68a4f6" class="image"><a href="Owners%20and%20permissions%2091b957af1ef74d2698c4b34db2f5bd7d/Untitled%2015.png"><img style="width:943px" src="Owners%20and%20permissions%2091b957af1ef74d2698c4b34db2f5bd7d/Untitled%2015.png"/></a></figure><p id="116f2e73-af31-4e1a-9552-f7b70aabaa04" class="">
+</p><p id="554696eb-2281-43f2-be07-4b33116c7c3a" class="">
+</p></li></ul><p id="247407a1-0ffe-45cd-b9f7-d6c99f778b54" class="">we can change the permission for the user, group and other in one command using the binary method </p><figure id="fb6a9ce8-04dd-41ce-9d00-3dad7b3667e5" class="image"><a href="Owners%20and%20permissions%2091b957af1ef74d2698c4b34db2f5bd7d/Untitled%2016.png"><img style="width:1286px" src="Owners%20and%20permissions%2091b957af1ef74d2698c4b34db2f5bd7d/Untitled%2016.png"/></a></figure><p id="8eb35ac0-c00f-4192-8fc0-c0004b685b3b" class="">
+</p><ul id="2950fbe1-7c81-43eb-a4ff-2b10fa62ded7" class="bulleted-list"><li style="list-style-type:disc"><code>sudo chmod 754 file</code> <ul id="7e95dea4-b9ba-4d5d-97e9-cc217ee9d896" class="bulleted-list"><li style="list-style-type:circle">1st digit 7=111 —&gt; r=1, w=1, x=1 —&gt; for user</li></ul><ul id="04e4baa2-ead1-42fa-9ec5-c51e5d5d82b0" class="bulleted-list"><li style="list-style-type:circle">2nd digit 5=101 —&gt; r=1, w=0, x=1 —&gt; for group</li></ul><ul id="390acaa0-8618-471f-bf6f-63167023dd96" class="bulleted-list"><li style="list-style-type:circle">3rd digit 4=100 —&gt; r=1, w=0, x=1 —&gt; for other</li></ul><figure id="c91b3aa2-d233-4f0d-bbe5-c7134163189b" class="image"><a href="Owners%20and%20permissions%2091b957af1ef74d2698c4b34db2f5bd7d/Untitled%2017.png"><img style="width:935px" src="Owners%20and%20permissions%2091b957af1ef74d2698c4b34db2f5bd7d/Untitled%2017.png"/></a></figure></li></ul><p id="d4d880c7-208b-451d-b270-35920ae46e8d" class="">
+</p><p id="8e0748af-8d0b-44e1-9a8e-461a816ee89d" class="">
+</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="67d9fa3e-95f0-4063-bc9a-2673597aa3c5"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Note: we can do the same for hidden files with <code>ls -la</code></div></figure><figure id="f2555fd3-984f-4acf-bb85-042301c3eaa6" class="image"><a href="Owners%20and%20permissions%2091b957af1ef74d2698c4b34db2f5bd7d/Untitled%2018.png"><img style="width:939px" src="Owners%20and%20permissions%2091b957af1ef74d2698c4b34db2f5bd7d/Untitled%2018.png"/></a></figure><p id="b943cfca-43ca-4c28-a146-443685b7ea76" class="">
+</p></div></article></body></html>
