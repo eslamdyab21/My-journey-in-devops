@@ -1,0 +1,792 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>bash scripting </title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="223b886f-2a1b-4a4f-addb-14fe7a1b90a1" class="page mono"><header><div class="page-header-icon undefined"><img class="icon" src="https://super.so/icon/light/edit-3.svg"/></div><h1 class="page-title">bash scripting </h1><table class="properties"><tbody><tr class="property-row property-row-relation"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesRelation"><polygon points="4.5 1 4.5 3 9.586 3 1 11.586 2.414 13 11 4.414 11 9.5 13 9.5 13 1"></polygon></svg></span>Project</th><td><a href="https://www.notion.so/Module1-Linux-012f8f8155f745f68053f61714910da8"><img class="icon" src="https://super.so/icon/light/folder-plus.svg"/>Module1: Linux</a></td></tr><tr class="property-row property-row-rollup"><th><span class="icon property-icon"><svg viewBox="0 0 18 18" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesRollup"><path d="M17,15.6l-5.119-5.119C12.583,9.499,13,8.299,13,7c0-3.314-2.686-6-6-6S1,3.686,1,7s2.686,6,6,6 c1.299,0,2.499-0.417,3.481-1.119L15.6,17L17,15.6z M7,11c-2.209,0-4-1.791-4-4c0-2.209,1.791-4,4-4s4,1.791,4,4 C11,9.209,9.209,11,7,11z"></path></svg></span>Area</th><td>https://www.notion.so/db4d3f8fd47546eebe52fe130a4b4108</td></tr><tr class="property-row property-row-select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesSelect"><path d="M7,13 C10.31348,13 13,10.31371 13,7 C13,3.68629 10.31348,1 7,1 C3.68652,1 1,3.68629 1,7 C1,10.31371 3.68652,13 7,13 Z M3.75098,5.32278 C3.64893,5.19142 3.74268,5 3.90869,5 L10.09131,5 C10.25732,5 10.35107,5.19142 10.24902,5.32278 L7.15771,9.29703 C7.07764,9.39998 6.92236,9.39998 6.84229,9.29703 L3.75098,5.32278 Z"></path></svg></span>Priority</th><td></td></tr><tr class="property-row property-row-rollup"><th><span class="icon property-icon"><svg viewBox="0 0 18 18" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesRollup"><path d="M17,15.6l-5.119-5.119C12.583,9.499,13,8.299,13,7c0-3.314-2.686-6-6-6S1,3.686,1,7s2.686,6,6,6 c1.299,0,2.499-0.417,3.481-1.119L15.6,17L17,15.6z M7,11c-2.209,0-4-1.791-4-4c0-2.209,1.791-4,4-4s4,1.791,4,4 C11,9.209,9.209,11,7,11z"></path></svg></span>Project Work Time</th><td></td></tr><tr class="property-row property-row-rollup"><th><span class="icon property-icon"><svg viewBox="0 0 18 18" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesRollup"><path d="M17,15.6l-5.119-5.119C12.583,9.499,13,8.299,13,7c0-3.314-2.686-6-6-6S1,3.686,1,7s2.686,6,6,6 c1.299,0,2.499-0.417,3.481-1.119L15.6,17L17,15.6z M7,11c-2.209,0-4-1.791-4-4c0-2.209,1.791-4,4-4s4,1.791,4,4 C11,9.209,9.209,11,7,11z"></path></svg></span>Project Priority</th><td></td></tr><tr class="property-row property-row-checkbox"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCheckbox"><path d="M0,3 C0,1.34314 1.34326,0 3,0 L11,0 C12.6567,0 14,1.34314 14,3 L14,11 C14,12.6569 12.6567,14 11,14 L3,14 C1.34326,14 0,12.6569 0,11 L0,3 Z M3,1.5 C2.17139,1.5 1.5,2.17157 1.5,3 L1.5,11 C1.5,11.8284 2.17139,12.5 3,12.5 L11,12.5 C11.8286,12.5 12.5,11.8284 12.5,11 L12.5,3 C12.5,2.17157 11.8286,1.5 11,1.5 L3,1.5 Z M2.83252,6.8161 L3.39893,6.27399 L3.57617,6.10425 L3.92334,5.77216 L4.26904,6.10559 L4.44531,6.27582 L5.58398,7.37402 L9.28271,3.81073 L9.45996,3.64008 L9.80664,3.3056 L10.1538,3.63989 L10.3311,3.81067 L10.8936,4.35303 L11.0708,4.52399 L11.4434,4.88379 L11.0708,5.24353 L10.8936,5.41437 L6.1084,10.0291 L5.93115,10.2 L5.58398,10.5344 L5.23682,10.2 L5.05957,10.0292 L2.83057,7.87946 L2.65283,7.70801 L2.27832,7.34674 L2.6543,6.98694 L2.83252,6.8161 Z"></path></svg></span>Done</th><td><div class="checkbox checkbox-on"></div></td></tr><tr class="property-row property-row-rollup"><th><span class="icon property-icon"><svg viewBox="0 0 18 18" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesRollup"><path d="M17,15.6l-5.119-5.119C12.583,9.499,13,8.299,13,7c0-3.314-2.686-6-6-6S1,3.686,1,7s2.686,6,6,6 c1.299,0,2.499-0.417,3.481-1.119L15.6,17L17,15.6z M7,11c-2.209,0-4-1.791-4-4c0-2.209,1.791-4,4-4s4,1.791,4,4 C11,9.209,9.209,11,7,11z"></path></svg></span>Siblings</th><td>https://www.notion.so/1936a5af2e944af19a09377717e9ab6c, https://www.notion.so/223b886f2a1b4a4faddb14fe7a1b90a1, https://www.notion.so/4db73fc8ec58453a847ca7a8c29491fd, https://www.notion.so/b4345eaf1ca84637835b517930fcff05, https://www.notion.so/ccf6b348a2f74cff960cd0a8f027c32d, https://www.notion.so/d70c980694fd4181a60175e2b3978cc7, https://www.notion.so/f35ee20c9be1405ebae9028252c1712e, https://www.notion.so/f7c3401918d449b28b9cd35af8f7682b</td></tr><tr class="property-row property-row-formula"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesFormula"><path d="M7.77892,7.06304 L4.62218,11.2875 C4.58556,11.3416 4.55285,11.4392 4.5504,11.5052 C4.5504,11.7022 4.7047,11.8619 4.89562,11.8619 L11.1383,11.8619 C11.6139,11.8619 11.9996,12.2598 11.9996,12.7507 L11.9996,13.1111 C11.9996,13.602 11.6139,14 11.1383,14 L1.861927,14 C1.385853,14 1.00011061,13.602 1.00011061,13.1111 L1.00011061,12.6858 C0.99718092,12.4783 1.0523567,12.3098 1.176868,12.1466 L4.39269,7.79888 C4.74816,7.31841 4.74572,6.65139 4.38683,6.17354 L1.400013,2.19436 C1.27306,2.03028 1.216419,1.85993 1.219349,1.65006 L1.219349,0.888889 C1.219349,0.397968 1.605091,0 2.08117,0 L10.91906,0 C11.3946,0 11.7804,0.397968 11.7804,0.888889 L11.7804,1.24925 C11.7804,1.74017 11.3946,2.13814 10.91906,2.13814 L5.13634,2.13814 C4.94542,2.13814 4.79064,2.29801 4.79064,2.49522 C4.79308,2.56049 4.82482,2.65709 4.86095,2.71087 L7.78038,6.68628 C7.8297,6.74847 7.84435,6.7934 7.84142,6.87363 C7.84435,6.95493 7.82921,7.00048 7.77892,7.06304 Z"></path></svg></span>ID</th><td>-Module1: Linux-</td></tr><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M7.01356 14.0001C8.8042 14.0001 10.5958 13.3107 11.9575 11.9324C14.681 9.21201 14.6808 4.7603 11.9571 2.04013C9.23336 -0.680043 4.77573 -0.680043 2.05199 2.04013C0.727519 3.36277 0 5.13301 0 6.99553C0 8.8764 0.727811 10.6285 2.05199 11.9509C3.43207 13.3106 5.22243 14.0001 7.01356 14.0001ZM3.72947 7.00914V8.461V8.65543H3.92382H5.34563H8.2794H8.4738V8.461V5.52541V3.37947V3.18502H8.2794H6.82747H6.63307V3.37947V6.81467H3.92382H3.72947V7.00914ZM1.83985 6.99553C1.83985 5.61698 2.38099 4.32597 3.36061 3.3477C5.36746 1.34337 8.64803 1.34062 10.6585 3.33944C10.6613 3.34219 10.6639 3.34494 10.6668 3.3477C12.676 5.3546 12.6763 8.63642 10.6668 10.6434C8.65705 12.6504 5.37031 12.6504 3.36061 10.6434C2.38099 9.66506 1.83985 8.37408 1.83985 6.99553Z"></path></svg></span>Created Time</th><td><time>@June 29, 2022 6:20 PM</time></td></tr><tr class="property-row property-row-date"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesDate"><path d="M10.8889,5.5 L3.11111,5.5 L3.11111,7.05556 L10.8889,7.05556 L10.8889,5.5 Z M12.4444,1.05556 L11.6667,1.05556 L11.6667,0 L10.1111,0 L10.1111,1.05556 L3.88889,1.05556 L3.88889,0 L2.33333,0 L2.33333,1.05556 L1.55556,1.05556 C0.692222,1.05556 0.00777777,1.75556 0.00777777,2.61111 L0,12.5 C0,13.3556 0.692222,14 1.55556,14 L12.4444,14 C13.3,14 14,13.3556 14,12.5 L14,2.61111 C14,1.75556 13.3,1.05556 12.4444,1.05556 Z M12.4444,12.5 L1.55556,12.5 L1.55556,3.94444 L12.4444,3.94444 L12.4444,12.5 Z M8.55556,8.61111 L3.11111,8.61111 L3.11111,10.1667 L8.55556,10.1667 L8.55556,8.61111 Z"></path></svg></span>Finished At</th><td><time>@June 29, 2022 11:57 PM</time></td></tr><tr class="property-row property-row-relation"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesRelation"><polygon points="4.5 1 4.5 3 9.586 3 1 11.586 2.414 13 11 4.414 11 9.5 13 9.5 13 1"></polygon></svg></span>Related to Uni Courses (Active Tasks)</th><td></td></tr></tbody></table></header><div class="page-body"><nav id="39cf936c-1893-4516-97f8-c97c489cc780" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#38dbc6b1-c9ce-4aa2-a420-9ffed27bf4d1">Variables</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#d9d33102-4c96-4bc5-a19e-e052fc7dbc11">Conditions</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#90725ef0-b056-49c9-bbcd-4a1cc42752fe">Numeric compactors </a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#b99b9d61-2b57-4696-b700-1a1bd96e7c5e">String operations </a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#25368090-6f2d-4aac-a364-8df251908143">Passing arguments to a script </a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#29cb6cd4-a09b-4600-b2de-cf8b39358e51">Reading user input</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#2bdd13f6-5cb7-4cec-a63b-7829cc87681d">Loops</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#6db1a98f-b7a7-4ff3-963f-2a99621f3afa">Functions</a></div></nav><p id="c2729594-8ed0-44a6-80fb-6d170acb0d2e" class="">
+</p><ul id="8626a2b4-a42c-4592-b4ab-a5b42de4209d" class="bulleted-list"><li style="list-style-type:disc">it’s a way to execute more than one command together. the commands are written in bash files <a href="http://file.sh"><code>file.sh</code></a> , the first line (shebang #!) must reference the bash location, by default it’s <code>#!/bin/bash</code> . to run the bash file: <code>./file.sh</code>  or <code>bash file.sh</code><figure id="b7a47a71-b7d4-4dab-a964-b04294207d81" class="image"><a href="bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled.png"><img style="width:945px" src="bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled.png"/></a></figure><figure id="cec8a9c0-a9b5-4890-9fdf-4bcd573b3d4e" class="image"><a href="bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled%201.png"><img style="width:942px" src="bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled%201.png"/></a></figure></li></ul><p id="2e7b4e38-90a2-4e7e-a980-505bdcf53a67" class="">
+</p><p id="955b5a8a-4766-42b9-b96a-02398054158e" class="">
+</p><h3 id="38dbc6b1-c9ce-4aa2-a420-9ffed27bf4d1" class="block-color-gray_background">Variables</h3><ul id="ef5c786d-22ba-47c0-8224-53250a465c76" class="bulleted-list"><li style="list-style-type:disc"><code>file_name= config.yaml</code> variable in bash</li></ul><ul id="3b86c1dc-8622-422d-9b05-ee58eabcb73d" class="bulleted-list"><li style="list-style-type:disc"><code>files = $(ls p0)</code> save the output of a command to a variable</li></ul><figure id="01dabb39-5b3a-42fe-bc3e-2e8ebf6dc8ff" class="image"><a href="bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled%202.png"><img style="width:939px" src="bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled%202.png"/></a></figure><figure id="af7660f8-76a2-4999-888a-2a63f69350c4" class="image"><a href="bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled%203.png"><img style="width:938px" src="bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled%203.png"/></a></figure><p id="4de41066-7968-4684-b5e1-50634c35bcc0" class="">
+</p><p id="345d85b6-9519-4c95-96ec-699472346828" class="">
+</p><h3 id="d9d33102-4c96-4bc5-a19e-e052fc7dbc11" class="block-color-gray_background">Conditions</h3><pre id="f137f4e3-a39a-4b49-8b00-1450bdf42e78" class="code"><code>if [condition]
+then
+	statement
+else
+	statement
+fi</code></pre><pre id="0e3fcd4e-6523-44ae-9707-a38029ec5d08" class="code"><code>#!/bin/bash
+echo &quot;this isthe first line command in bash&quot;
+
+file_name=config.yaml
+
+if [ -d &quot;config&quot; ]
+then
+   echo &quot;reading config directory conternt&quot;
+   config_files=$(ls config)
+else
+   echo &quot;config dir not found, creating one&quot;
+   mkdir config
+fi
+
+
+
+echo &quot;using file $file_name to configure something&quot;
+
+echo &quot;here are all files inside config dir: $config_files&quot;</code></pre><figure id="8f2bd7fc-b3f7-4f69-83f2-8e95cf4759ff" class="image"><a href="bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled%204.png"><img style="width:942px" src="bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled%204.png"/></a></figure><figure id="2561c5fd-6218-4b4c-92c5-029e4368fdfa" class="image"><a href="bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled%205.png"><img style="width:942px" src="bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled%205.png"/></a></figure><p id="d7c244ce-a1f3-4240-892a-69167b8a7646" class=""><code>-d</code> in if condition is a <code>file test operator</code> which checks if a directory exists or not. And there are other test operators:</p><figure id="4d2f2eea-ec73-4119-8fc3-c4b8f6ed75b1" class="image"><a href="bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled%206.png"><img style="width:454px" src="bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled%206.png"/></a></figure><p id="1575d35f-1ac0-4424-9c5e-3979c854289c" class="">
+</p><p id="d201c2df-58c9-429a-9389-ee7038ed5ee6" class="">
+</p><h3 id="90725ef0-b056-49c9-bbcd-4a1cc42752fe" class="block-color-gray_background">Numeric compactors </h3><figure id="02ffa19b-11ca-4bf4-846a-6eb417ea9b48" class="image"><a href="bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled%207.png"><img style="width:432px" src="bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled%207.png"/></a></figure><ul id="e605bd01-4321-4250-9955-e91fd8dee3dc" class="bulleted-list"><li style="list-style-type:disc"><code>if [ “$num_files” -eq 10]</code></li></ul><p id="83b61686-a5b1-4c00-857a-64a7e3558617" class="">
+</p><h3 id="b99b9d61-2b57-4696-b700-1a1bd96e7c5e" class="block-color-gray_background">String operations </h3><figure id="64c10bf3-0501-40ec-8b3e-c580389563dd" class="image"><a href="bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled%208.png"><img style="width:773px" src="bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled%208.png"/></a></figure><figure id="1d63b454-4981-4573-9150-708c930c69e5" class="image"><a href="bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled%209.png"><img style="width:1539px" src="bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled%209.png"/></a></figure><p id="f9689521-ce39-4465-8825-86bd88c3a6a9" class="">
+</p><p id="d5bfcd2a-263f-4ed0-a28e-891d7076bbe5" class="">
+</p><h3 id="25368090-6f2d-4aac-a364-8df251908143" class="block-color-gray_background">Passing arguments to a script </h3><figure id="e93c18de-05da-4799-9ea7-bcd737c383ab" class="image"><a href="bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled%2010.png"><img style="width:941px" src="bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled%2010.png"/></a></figure><pre id="0c42b205-bcbe-4dc6-a9b5-da45d2049029" class="code"><code>#!/bin/bash
+
+file_name=$1
+
+config_dir=$2
+
+echo &quot;-----------------&quot;
+if [ -d &quot;$config_dir&quot; ]
+then
+   echo &quot;reading config directory conternt&quot;
+   config_files=$(ls $config_dir)
+else
+   echo &quot;config dir not found, creating one&quot;
+   mkdir $config_dir
+   touch $config_dir/config.sh
+   config_files=$(ls $config_dir)
+fi
+
+
+echo &quot;-------------------&quot;
+echo &quot;using file $file_name to configure something&quot;
+echo &quot;-------------------&quot;
+
+echo &quot;here are all files inside config dir: $config_files&quot;</code></pre><figure id="eedece68-68b5-4a51-b52a-fabfd2e17376" class="image"><a href="bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled%2011.png"><img style="width:931px" src="bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled%2011.png"/></a></figure><p id="8fa727f8-e5f4-4282-a1e2-d907becaf3c7" class="">
+</p><ul id="61de8cd1-77ce-49f9-a118-54f469544896" class="bulleted-list"><li style="list-style-type:disc">there are two special parameters which allow us to store all the user input parameters <code>$*</code>, and their number <code>$#</code><figure id="bb93480e-25be-456f-984f-c906d58f7994" class="image"><a href="bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled%2012.png"><img style="width:943px" src="bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled%2012.png"/></a></figure><figure id="21b4a816-552e-4b81-92e7-df39d9c12b48" class="image"><a href="bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled%2013.png"><img style="width:939px" src="bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled%2013.png"/></a></figure></li></ul><h3 id="29cb6cd4-a09b-4600-b2de-cf8b39358e51" class="block-color-gray_background">Reading user input</h3><figure id="4e0fe0e3-a6b1-472b-9ac5-979ae76e55d1" class="image"><a href="bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled%2014.png"><img style="width:934px" src="bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled%2014.png"/></a></figure><figure id="f066e7ff-609e-469e-a92c-f2f9488afcc5" class="image"><a href="bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled%2015.png"><img style="width:934px" src="bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled%2015.png"/></a></figure><p id="91f768f8-1691-41ce-a49d-97025cfcd7ab" class="">
+</p><p id="77eba9eb-d449-46a2-a3cf-84bec1ee2467" class="">
+</p><h3 id="2bdd13f6-5cb7-4cec-a63b-7829cc87681d" class="block-color-gray_background">Loops</h3><figure id="2f3a674c-9c4f-46aa-a60f-5193ab967c6b" class="image"><a href="bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled%2016.png"><img style="width:943px" src="bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled%2016.png"/></a></figure><figure id="fdd55cf6-16e3-4b33-b3eb-d581a5054593" class="image"><a href="bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled%2017.png"><img style="width:942px" src="bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled%2017.png"/></a></figure><ul id="00f8e58b-0a0d-4dee-9082-1a9c1ae72041" class="bulleted-list"><li style="list-style-type:disc">loop with if <figure id="a7efd7f2-8acb-40a4-9001-a8a279966fb4" class="image"><a href="bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled%2018.png"><img style="width:944px" src="bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled%2018.png"/></a></figure><pre id="53070a8f-6590-4455-9d62-9c9800cbdc74" class="code"><code>#!/bin/bash
+echo &quot;all params: $*&quot;
+echo &quot;number of params: $#&quot;
+echo &quot; &quot;
+
+for param in $*
+do
+  if [ -d &quot;$param&quot; ]
+  then
+    echo &quot;$param is a directory, printing its content: &quot;
+    ls $param
+    echo &quot; &quot;
+  fi
+done</code></pre><figure id="bf3f32cb-bff7-40ef-9db4-a1a051a7e387" class="image"><a href="bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled%2019.png"><img style="width:938px" src="bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled%2019.png"/></a></figure></li></ul><ul id="e48c62eb-d6a8-49ac-bfaf-ba9fd4d01767" class="bulleted-list"><li style="list-style-type:disc">while<figure id="31038bbc-2bcf-4bc1-bde5-a31f4a122014" class="image"><a href="bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled%2020.png"><img style="width:931px" src="bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled%2020.png"/></a></figure><pre id="37cfdaed-a292-47a8-92c6-7fef1eb6fc9e" class="code"><code>#!/bin/bash
+
+sum=0
+while true
+do
+   read -p &quot;enter a score: &quot; score
+
+   if [ &quot;$score&quot; == &quot;q&quot; ]
+   then
+      echo &quot; &quot;
+      echo &quot;Quiting.....&quot;
+      break
+   fi
+
+   sum=$(($sum+$score))
+   echo &quot;total score: $sum&quot;
+done</code></pre><figure id="929213da-d866-4602-a1b7-293c128f2260" class="image"><a href="bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled%2021.png"><img style="width:933px" src="bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled%2021.png"/></a></figure><p id="a9437083-d000-4049-8aaa-308f7df57c2d" class="">note that in line 17 <code>sum=$(($sum+$score))</code> if we typed it like this <code>sum=$sum+$score</code> it will concatenate two strings</p><p id="859f8b51-bd48-42d2-9987-c333672019ac" class="">
+</p></li></ul><h3 id="6db1a98f-b7a7-4ff3-963f-2a99621f3afa" class="block-color-gray_background">Functions</h3><figure id="0b0d83d2-addc-4ef2-99f1-a117eb3b5bc8" class="image"><a href="bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled%2022.png"><img style="width:935px" src="bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled%2022.png"/></a></figure><figure id="6ffa81bd-bb15-4ec8-b2ae-d737a1bcdeec" class="image"><a href="bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled%2023.png"><img style="width:932px" src="bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled%2023.png"/></a></figure><p id="45fa087e-553b-4d6f-b423-f5218c6ec144" class="">
+</p><p id="71150290-381a-4649-ac1e-50a4b1a4d1a6" class="">ex2</p><figure id="639e7cb9-e5e8-4cba-b0c0-bf15e4044dff" class="image"><a href="bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled%2024.png"><img style="width:944px" src="bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled%2024.png"/></a></figure><pre id="25b16c5b-c5d4-4f91-b526-32cb0869bef9" class="code"><code>#!/bin/bash
+
+function sum(){
+   total=$(($1+$2))
+   return $total
+}
+
+sum 2 10
+result=$?
+# above two lines same as result=$(sum 2 10)
+
+echo &quot;2 + 10 = $result&quot;
+echo &quot; &quot;
+echo &quot;----------------------------&quot;
+
+
+function create_file() {
+   file_name=$1
+   is_shell_script=$2
+
+   touch $file_name
+   echo &quot; file $file_name created&quot;
+
+   if [ &quot;$is_shell_script&quot; = true ]
+   then
+      chmod u+x $file_name
+      echo &quot;added execute permission&quot;
+   fi
+   echo &quot; &quot;
+}
+
+create_file test.txt
+create_file con.yaml
+create_file script.sh true</code></pre><figure id="a56809b2-aefe-4807-acb0-eb24c870da5e" class="image"><a href="bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled%2025.png"><img style="width:934px" src="bash%20scripting%20b7a47a71b7d44daba964b04294207d81/Untitled%2025.png"/></a></figure></div></article></body></html>
